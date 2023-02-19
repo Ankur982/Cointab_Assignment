@@ -2,8 +2,10 @@ const userModel = require("../models/userDetails.models");
 const axios = require("axios");
 
 const postUsers = async (req, res) => {
+    let page = req.query.page;
+    console.log(page)
     try {
-        const { data } = await axios.get("https://randomuser.me/api/?results=100");
+        const { data } = await axios.get(`https://randomuser.me/api/?results=100&page=${page}`);
 
         console.log(data);
 
@@ -37,7 +39,7 @@ const getUsers = async (req, res) => {
 
         const allUsers = await userModel.find();
         let users;
-        
+
         if (gender && country) {
             users = await userModel.find({
                 $and: [{ "gender": gender }, { "location.country": country }]
