@@ -1,9 +1,8 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const dbConnect = require("./config/dbConnect");
-
 const cors = require("cors");
-
+const userRouter = require("./routes/user.router")
 
 //dotenv
 dotenv.config();
@@ -24,7 +23,7 @@ app.use(express.json());
 
 //api base routes
 
-
+app.use("/user", userRouter);
 
 
 //listening server
