@@ -5,6 +5,7 @@ import { DETAILS_USERS, ERROR, FETCH_USERS, LOADING } from "./actionType"
 const initState = {
     loading: false,
     error: false,
+    totalPages: 0,
     addedUsers: [],
     users: []
 }
@@ -39,6 +40,7 @@ export const Reducer = (state = initState, { type, payload }) => {
                 ...state,
                 loading: false,
                 error: false,
+                totalPages: payload.users.length,
                 users: payload
             }
 

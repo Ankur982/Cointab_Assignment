@@ -5,42 +5,43 @@ import { useNavigate } from "react-router-dom";
 import { deleteUsers, detailsUsers, fetchUsers } from "../../redux/action";
 
 export const Home = () => {
-  const [page, setPage] = useState(1)
-  const { loading, error, addedUsers, users } = useSelector((store)=>store)
-  console.log(addedUsers, users)
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-
+  const [page, setPage] = useState(1);
+  const { loading, error, addedUsers, users } = useSelector((store) => store);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleFetchNewUsers = () => {
-    if(loading){
-      alert("loading....")
-      return
+    if (loading) {
+      alert("Wait Till Users Added successfully");
+      return;
     }
-    setPage(page+1)
-    dispatch(fetchUsers(page))
-    alert(`new 100 user ADDED`)
-  }
+    setPage(page + 1);
+    dispatch(fetchUsers(page));
+    alert(`100 New Users Added successfully`);
+  };
 
   const handleDeleteUsers = () => {
-    if(users.totalusers==0){
-      alert("please fetch user first")
-      return 
+    if (users.totalusers == 0) {
+      alert("please fetch user first");
+      return;
     }
-    setPage(1)
-    dispatch(deleteUsers())
-    alert(`All users Deleted`)
-  }
+    setPage(1);
+    let warn = "Are You Sure Yout Want To Delete All users";
+
+    if (window.confirm(warn) != true) {
+      return
+    } 
+    dispatch(deleteUsers());
+    alert("All users Deleted successfully");
+  };
 
   const handleNavigatePage = () => {
-    navigate("/userDetails")
-  }
+    navigate("/userDetails");
+  };
 
-
-
-  useEffect(()=>{
-    dispatch(detailsUsers())
-  },[page])
+  useEffect(() => {
+    dispatch(detailsUsers());
+  }, [page]);
 
   return (
     <Box
@@ -62,14 +63,25 @@ export const Home = () => {
           </Text>
         </Box>
         <Box display={"flex"} gap={"50px"} mt={"50px"}>
-          <Button colorScheme="blackAlpha" size="lg" onClick={()=>handleFetchNewUsers()}
+          <Button
+            colorScheme="blackAlpha"
+            size="lg"
+            onClick={() => handleFetchNewUsers()}
           >
             Fetch Users
           </Button>
-          <Button colorScheme="blackAlpha" size="lg" onClick={()=>handleDeleteUsers()}>
+          <Button
+            colorScheme="blackAlpha"
+            size="lg"
+            onClick={() => handleDeleteUsers()}
+          >
             Delete Users
           </Button>
-          <Button colorScheme="blackAlpha" size="lg" onClick={()=>handleNavigatePage()}>
+          <Button
+            colorScheme="blackAlpha"
+            size="lg"
+            onClick={() => handleNavigatePage()}
+          >
             User Details
           </Button>
         </Box>

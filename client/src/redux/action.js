@@ -33,7 +33,6 @@ export const deleteUsers = () => async (dispatch) => {
 
 export const detailsUsers = (page, gender , country) => async (dispatch) => {
 
-    console.log(country,gender)
     dispatch({
         type: LOADING
     });

@@ -22,20 +22,23 @@ import { detailsUsers } from "../../redux/action";
 
 export const UserDetails = () => {
   const dispatch = useDispatch();
-  const { loading, error, addedUsers, users } = useSelector((store) => store);
+  const { loading, error,totalPages, addedUsers, users } = useSelector((store) => store);
 
   const [page, setPage] = useState(1)
   const [country,setCountry] = useState()
   const [gender,setGender] = useState()
-  
   let total;
   if(users.totalusers){
      total = +users.totalusers/10
   }
 
+
   useEffect(() => {
     dispatch(detailsUsers(page, gender, country));
   }, [page,country,gender]);
+
+
+  
 
   return (
     <Box m={"auto"}>

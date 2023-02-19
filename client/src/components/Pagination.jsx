@@ -6,12 +6,13 @@ function Pagination({ total, current, setPage }) {
       disabled={current === i + 1}
       key={i + 1}
       color="black"
+      m={"50px 5px"}
     >
       {i + 1}
     </Button>
   ));
 
-  return <Button colorScheme="blackAlpha">{pages}</Button>;
+  return <Box >{pages}</Box>;
 }
 
 export default Pagination;
