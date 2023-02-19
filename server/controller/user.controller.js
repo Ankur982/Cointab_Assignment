@@ -22,18 +22,41 @@ const postUsers = async (req, res) => {
 
 
 const getUsers = async (req, res) => {
-    let page = +(req.query.page)
-    console.log(page)
-    let skipUser = (page-1)*10
+
+    let page = +(req.query.page);
+
+    let gender = req.query.gender;
+
+    let country = req.query.country;
+
+    console.log(country)
+
+    let skipUser = (page - 1) * 10;
+
     try {
 
-        const allUsers = await userModel.find().limit(10).skip(skipUser)
+        const allUsers = await userModel.find();
+        let users;
+        
+        if (gender && country) {
+            users = await userModel.find({
+                $and: [{ "gender": gender }, { "location.country": country }]
+            }).limit(10).skip(skipUser);
 
-        res.status(200).send({ status: "success", users: allUsers })
+        } else if (gender) {
+            users = await userModel.find({ "gender": gender }).limit(10).skip(skipUser);
+        }
+        else if (country) {
+            users = await userModel.find({ "location.country": country }).limit(10).skip(skipUser);
+        }
+        else {
+            users = await userModel.find().limit(10).skip(skipUser);
+        }
+        res.status(200).send({ status: "success", users: users, totalusers: allUsers.length });
 
     } catch (err) {
 
-        res.status(500).send({ status: "error", message: err.message })
+        res.status(500).send({ status: "error", message: err.message });
 
     }
 };
@@ -43,6 +66,7 @@ const getUsers = async (req, res) => {
 const deleteAllUsers = async (req, res) => {
 
     try {
+
         await userModel.deleteMany();
 
         res.status(200).send({ status: "success" });
