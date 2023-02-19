@@ -22,11 +22,12 @@ const postUsers = async (req, res) => {
 
 
 const getUsers = async (req, res) => {
-    let page = req.query.page
-
+    let page = +(req.query.page)
+    console.log(page)
+    let skipUser = (page-1)*10
     try {
 
-        const allUsers = await userModel.find().limit(10).skip(page)
+        const allUsers = await userModel.find().limit(10).skip(skipUser)
 
         res.status(200).send({ status: "success", users: allUsers })
 
@@ -57,4 +58,4 @@ const deleteAllUsers = async (req, res) => {
 
 
 
-module.exports = { postUsers, getUsers };
+module.exports = { postUsers, getUsers, deleteAllUsers };
