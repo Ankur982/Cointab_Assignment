@@ -9,7 +9,7 @@ export const Home = () => {
   const { loading, error, addedUsers, users } = useSelector((store) => store);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+console.log(users.users.length)
   //function to handle fetch users
   const handleFetchNewUsers = () => {
     if (loading) {
@@ -23,8 +23,10 @@ export const Home = () => {
 
   //function to handle delete users
   const handleDeleteUsers = () => {
-    if (users.totalusers == 0) {
-      alert("please fetch user first");
+
+
+    if (users.users.length === 0) {
+      alert("Please Fetch User First");
       return;
     }
     setPage(1);
@@ -40,12 +42,18 @@ export const Home = () => {
     alert("All users Deleted successfully");
   };
 
-////function to navigate to page 2
+//function to navigate to page 2
   const handleNavigatePage = () => {
+
+    if (users.users.length === 0) {
+      alert("please fetch user first");
+      return;
+    }
+
     navigate("/userDetails");
   };
 
-  
+
 
   useEffect(() => {
     dispatch(detailsUsers());

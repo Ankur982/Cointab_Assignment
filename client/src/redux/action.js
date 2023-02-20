@@ -10,7 +10,7 @@ export const fetchUsers = (page) => async (dispatch) => {
     });
 
     try {
-        let { data } = await axios.post(`http://localhost:8000/user/fetchUsers?page=${page}`);
+        let { data } = await axios.post(`https://cointabbackend-toli.onrender.com/user/fetchUsers?page=${page}`);
         dispatch({
             type: FETCH_USERS,
             payload: data,
@@ -24,7 +24,7 @@ export const fetchUsers = (page) => async (dispatch) => {
 
 
 export const deleteUsers = () => async (dispatch) => {
-    await axios.delete('http://localhost:8000/user/deleteUsers');
+    await axios.delete('https://cointabbackend-toli.onrender.com/user/deleteUsers');
     dispatch({
         type: DELETE_USERS,
     });
@@ -39,25 +39,25 @@ export const detailsUsers = (page, gender, country) => async (dispatch) => {
 
     try {
         if (country && gender) {
-            let { data } = await axios.get(`http://localhost:8000/user/usersDetails?page=${page}&country=${country}&gender=${gender}`);
+            let { data } = await axios.get(`https://cointabbackend-toli.onrender.com/user/usersDetails?page=${page}&country=${country}&gender=${gender}`);
             dispatch({
                 type: DETAILS_USERS,
                 payload: data,
             });
         } else if (country) {
-            let { data } = await axios.get(`http://localhost:8000/user/usersDetails?page=${page}&country=${country}`);
+            let { data } = await axios.get(`https://cointabbackend-toli.onrender.com/user/usersDetails?page=${page}&country=${country}`);
             dispatch({
                 type: DETAILS_USERS,
                 payload: data,
             });
         } else if (gender) {
-            let { data } = await axios.get(`http://localhost:8000/user/usersDetails?page=${page}&gender=${gender}`);
+            let { data } = await axios.get(`https://cointabbackend-toli.onrender.com/user/usersDetails?page=${page}&gender=${gender}`);
             dispatch({
                 type: DETAILS_USERS,
                 payload: data,
             });
         } else {
-            let { data } = await axios.get(`http://localhost:8000/user/usersDetails?page=${page}`);
+            let { data } = await axios.get(`https://cointabbackend-toli.onrender.com/user/usersDetails?page=${page}`);
             dispatch({
                 type: DETAILS_USERS,
                 payload: data,
