@@ -15,7 +15,12 @@ export const Navbar = () => {
       p="5"
     >
       <Link to="/">
-        <Image src={"https://www.cointab.in/wp-content/uploads/2021/06/cointab_green-1.png"} alt={"img"} />
+        <Image
+          src={
+            "https://www.cointab.in/wp-content/uploads/2021/06/cointab_green-1.png"
+          }
+          alt={"img"}
+        />
       </Link>
       <Link to="/">
         <Text>Home</Text>

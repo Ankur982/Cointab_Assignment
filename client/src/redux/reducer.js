@@ -44,7 +44,7 @@ export const Reducer = (state = initState, { type, payload }) => {
                 users: payload
             }
 
-        
+
 
         default: return state
     }

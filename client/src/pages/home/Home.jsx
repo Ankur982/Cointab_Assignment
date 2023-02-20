@@ -10,6 +10,7 @@ export const Home = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  //function to handle fetch users
   const handleFetchNewUsers = () => {
     if (loading) {
       alert("Wait Till Users Added successfully");
@@ -20,24 +21,31 @@ export const Home = () => {
     alert(`100 New Users Added successfully`);
   };
 
+  //function to handle delete users
   const handleDeleteUsers = () => {
     if (users.totalusers == 0) {
       alert("please fetch user first");
       return;
     }
     setPage(1);
+
     let warn = "Are You Sure Yout Want To Delete All users";
 
-    if (window.confirm(warn) != true) {
-      return
-    } 
+    if (window.confirm(warn) !== true) {
+      return;
+    }
+
     dispatch(deleteUsers());
+
     alert("All users Deleted successfully");
   };
 
+////function to navigate to page 2
   const handleNavigatePage = () => {
     navigate("/userDetails");
   };
+
+  
 
   useEffect(() => {
     dispatch(detailsUsers());
